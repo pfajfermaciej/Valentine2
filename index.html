@@ -38,6 +38,9 @@
         }
         .buttons {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         button {
             font-size: 18px;
@@ -74,7 +77,7 @@
             <button class="yes" onclick="showMessage()">Tak</button>
             <button class="no" onmouseover="moveNoButton()">Nie</button>
         </div>
-        <div class="hidden-message" id="message">Kocham Cię! Zajrzyj do komody na samym dole </div>
+        <div class="hidden-message" id="message">Kocham Cię! Zajrzyj do komody na samym dole. </div>
       <div class="heart">❤️ </div>
     </div>
     <script>
@@ -87,7 +90,7 @@
             let noButton = document.querySelector('.no');
             noButton.style.display = 'none'; // Ukryj przycisk 'Nie'
         }
-        
+
         function moveNoButton() {
             let button = document.querySelector('.no');
             let x = Math.random() * (window.innerWidth - 100);
