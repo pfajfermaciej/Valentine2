@@ -80,7 +80,14 @@
     <script>
         function showMessage() {
             document.getElementById('message').style.display = 'block';
+            hideNoButton();  // Ukryj przycisk 'Nie' po kliknięciu 'Tak'
         }
+
+        function hideNoButton() {
+            let noButton = document.querySelector('.no');
+            noButton.style.display = 'none'; // Ukryj przycisk 'Nie'
+        }
+        
         function moveNoButton() {
             let button = document.querySelector('.no');
             let x = Math.random() * (window.innerWidth - 100);
