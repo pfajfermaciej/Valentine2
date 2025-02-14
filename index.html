@@ -37,7 +37,7 @@
             100% { transform: scale(1); }
         }
         .buttons {
-            margin-top: 20px;
+            margin-top: 40px; /* Większy odstęp od pytania */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -56,6 +56,7 @@
         .yes {
             background-color: #ff4d6d;
             color: white;
+            display: none; /* Początkowo ukryty */
         }
         .no {
             background-color: #ccc;
@@ -67,6 +68,21 @@
             font-size: 20px;
             color: #ff4d6d;
             margin-top: 20px;
+        }
+        .hint-message {
+            display: none;
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+        }
+        .final-message {
+            display: none;
+            font-size: 20px;
+            color: #ff4d6d;
+            margin-top: 20px;
+        }
+        .heart:last-of-type {
+            margin-top: 40px; /* Większy odstęp od przycisku Nie */
         }
     </style>
 </head>
@@ -80,17 +96,30 @@
             <button class="no" onmouseover="moveNoButton()">Nie</button>
         </div>
         <div class="hidden-message" id="message">Kocham Cię! Zajrzyj do komody na samym dole. </div>
-      <div class="heart">❤️ </div>
+        <div class="hint-message" id="hint">Nie tak łatwo Kochanie</div>
+        <div class="final-message" id="finalMessage">Miłego czytania! :)</div>
+        <div class="heart">❤️ </div>
     </div>
     <script>
+        let noHoverCount = 0;
+
         function showMessage() {
             document.getElementById('message').style.display = 'block';
             hideNoButton();  // Ukryj przycisk 'Nie' po kliknięciu 'Tak'
+            hideHintMessage(); // Ukryj podpowiedź
+            
+            setTimeout(() => {
+                document.getElementById('finalMessage').style.display = 'block';
+            }, 15000); // Po 15 sekundach pokazuje się komunikat "Miłego czytania! :)"
         }
 
         function hideNoButton() {
             let noButton = document.querySelector('.no');
             noButton.style.display = 'none'; // Ukryj przycisk 'Nie'
+        }
+
+        function hideHintMessage() {
+            document.getElementById('hint').style.display = 'none'; // Ukryj podpowiedź
         }
 
         function moveNoButton() {
@@ -99,6 +128,16 @@
             let y = Math.random() * (window.innerHeight - 50);
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
+            
+            noHoverCount++;
+            
+            if (noHoverCount === 3) {
+                document.getElementById('hint').style.display = 'block';
+            }
+            
+            if (noHoverCount === 7) {
+                document.querySelector('.yes').style.display = 'inline-block';
+            }
         }
     </script>
 </body>
